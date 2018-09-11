@@ -1,0 +1,28 @@
+<% include partials/header %>
+<div class="">
+    <form action="/evaluate" method="post">
+        <div class="form-group">
+            <input type="text" name="user" value=<%= user %>  >
+        </div>
+        <div class="form-group">
+            <input type="text" name="truck" value="<%- truck %>" >
+        </div>
+        <div class="form-group">
+            <select  name="rating">
+                <option value=""/>
+                <option value="1">Very Good</option>
+                <option value="2">Good</option>
+                <option value="3">So-So</option>
+                <option value="4">Poor</option>
+                <option value="5">Very Bad</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <textarea name="Comment" rows="8" cols="80"></textarea>
+        </div>
+        <div class="form-group">
+            <button type="submit">Submit</button>
+        </div>
+    </form>
+</div>
+<% include partials/footer %>
