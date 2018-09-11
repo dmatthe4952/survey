@@ -4,7 +4,7 @@
   "description": "Survey Web page",
   "main": "app.js",
   "scripts": {
-      "starat": "node app.js",
+      "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "David Matthews",
