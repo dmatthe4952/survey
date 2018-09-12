@@ -1,36 +1,84 @@
-<% include partials/header %>
-<div>
-    <h1>Posts Page</h1>
-    <!-- <% trucks %> -->
-    <table cellspacing=10>
-        <header>
-            <tr>
-                <th>Food Truck</th>
-                <th></th>
-            </tr>
-        </header>
-        <body>
-            <% trucks.forEach(function(truck) { %>
-                <tr>
-                    <td><%= truck %></td>
-                    <td>
-                        <button class="evaluateButton" > Evaluate </button>
-                    </td>
-                </tr>
-            <%})%>
-        </body>
-    </table>
-</div>
-<% include partials/footer %>
 
+<div class="container">
+    <h2>Food Truck</h2>
+    <table id="listingTable" class="row"></table>
+    </table>
+    </br>
+    <div class="buttons">
+        <a href="javascript:prevPage()" id="btn_prev">Prev</a>
+        <a href="javascript:nextPage()" id="btn_next">Next</a>
+        page: <span id="page"></span>
+    </div>
+</div>
 
 <script type="text/javascript">
-    var buttons = document.getElementsByClassName('evaluateButton');
-    for(var i=0;i < buttons.length; i++){
-        buttons[i].addEventListener('click', function (e){
-            e.preventDefault();
-            var truck = this.offsetParent.previousElementSibling.textContent;
-            document.location.assign('/evaluate/'+truck);
-        })
+    var objJson = {};
+    var current_page=1;
+    var records_per_page = 30;
+    var jsonString = <%- trucks %>
+    objJson = jsonString["trucks"];
+    console.dir(objJson);
+    changePage(1);
+
+    function prevPage()
+    {
+        if (current_page > 1) {
+            current_page--;
+            changePage(current_page);
+        }
     }
-</script>
+
+    function nextPage()
+    {
+        if (current_page < numPages()) {
+            current_page++;
+            changePage(current_page);
+        }
+    }
+    function changePage(page)
+    {
+        var btn_next = document.getElementById("btn_next");
+        var btn_prev = document.getElementById("btn_prev");
+        var listing_table = document.getElementById("listingTable");
+        var page_span = document.getElementById("page");
+
+        // Validate page
+        if (page < 1) page = 1;
+        if (page > numPages()) page = numPages();
+
+        listing_table.innerHTML = "";
+
+        for (var i = (page-1) * records_per_page; i < (page * records_per_page) && i < objJson.length; i++) {
+            listing_table.innerHTML += "<tr><td>" + objJson[i] + "</td><td><button class='evaluateButton' > Evaluate </button></td> </tr>";
+        }
+        page_span.innerHTML = page + "/" + numPages();
+
+        if (page == 1) {
+            btn_prev.style.visibility = "hidden";
+        } else {
+            btn_prev.style.visibility = "visible";
+        }
+
+        if (page == numPages()) {
+            btn_next.style.visibility = "hidden";
+        } else {
+            btn_next.style.visibility = "visible";
+        }
+        var buttons = document.getElementsByClassName('evaluateButton');
+        for(var i=0;i < buttons.length; i++){
+            buttons[i].addEventListener('click', function (e){
+                e.preventDefault();
+                var truck = this.offsetParent.previousElementSibling.textContent;
+                document.location.assign('/evaluate/'+truck);
+            })
+        }
+    }
+    function numPages()
+    {
+        return Math.ceil(objJson.length / records_per_page);
+    }
+
+    // window.onload = function() {
+    //     changePage(1);
+    // };
+    </script>

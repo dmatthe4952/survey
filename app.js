@@ -44,6 +44,8 @@ app.use(function(req, res, next){
    res.locals.success = req.flash("success");
    next();
 });
+trucksObject = {};
+
 app.get("/", function(req,res){
   res.render("home");
 });
@@ -63,9 +65,13 @@ let list = [];
 app.get("/trucks", function(req, res){
     scraper.dataScrape(urlTracks, (data) => {
         data.forEach(function(truck){
-            list.push(truck.trim());
+            list.push('"'+truck+'"');
         })
-        res.render("trucks",{trucks:list, user:req.user.username});
+        var listString = "\{\"trucks\":\["+list+"\]}";
+        // console.log(listString);
+        trucksObject = JSON.parse(listString);
+        console.dir(trucksObject);
+        res.render("trucks",{trucks:JSON.stringify(trucksObject), user:req.user.username});
     })
 });
 
@@ -76,8 +82,10 @@ app.get("/evaluate/:truck", function(req,res){
 });
 
 app.post("/evaluate", function(req,res){
-    console.log(req.body);
-    res.render("trucks",{trucks:list, user:req.session.passport.users})
+    var eval = new Evaluation(req.body);
+    console.log("evaluation: ",req.body)
+    eval.save();
+    res.render("trucks",{trucks:JSON.stringify(trucksObject), user:req.session.passport.user})
 })
 
 app.get("*", function(req,res) {
