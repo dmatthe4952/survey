@@ -70,20 +70,17 @@ app.get("/trucks", function(req, res){
         var listString = "\{\"trucks\":\["+list+"\]}";
         // console.log(listString);
         trucksObject = JSON.parse(listString);
-        console.dir(trucksObject);
         res.render("trucks",{trucks:JSON.stringify(trucksObject), user:req.user.username});
     })
 });
 
 app.get("/evaluate/:truck", function(req,res){
     var truck = req.params.truck;
-    console.log("Session cookie: ",req.session);
     res.render("evaluate",{user:req.session.passport.user, truck:truck});
 });
 
 app.post("/evaluate", function(req,res){
     var eval = new Evaluation(req.body);
-    console.log("evaluation: ",req.body)
     eval.save();
     res.render("trucks",{trucks:JSON.stringify(trucksObject), user:req.session.passport.user})
 })
