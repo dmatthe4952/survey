@@ -4,23 +4,23 @@ data = [
     {
         username: 'test2@example.com',
         password: 'password123'
-    }
+    },
     {
         username: 'becky_duckett',
         password: 'password123'
-    }
+    },
     {
         username: 'carol',
         password: 'password123'
-    }
+    },
     {
         username: 'candy',
         password: 'password123'
-    }
+    },
     {
         username: 'dave',
         password: 'password123'
-    }
+    },
     {
         username: 'other',
         password: 'password123'
