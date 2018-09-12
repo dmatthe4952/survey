@@ -26,7 +26,7 @@ app.use(require("express-session")({
     saveUninitialized: false
 }));
 app.use(flash());
-var url = process.env.DATABASEURL || "mongodb://localhost/survey_v1";
+var url = process.env.MONGODB_URI || "mongodb://localhost/survey_v1";
 mongoose.connect(url);
 
 userSeedDB();
