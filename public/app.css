@@ -11,3 +11,16 @@ body {
 .container{
     margin-left: 40px;
 }
+
+@media screen(max-width=690){
+    body{
+        width: 75%;
+        font-size: 2vw;
+    }
+}
+@media screen(min-width=690){
+    body{
+        width: 75%;
+        font-size: 3vw;
+    }
+}

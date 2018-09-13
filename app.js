@@ -12,6 +12,7 @@ flash       = require("connect-flash"),
 LocalStrategy = require("passport-local"),
 User = require('./models/user'),
 Evaluation = require('./models/evaluation'),
+Total = require('./models/total'),
 userSeedDB = require('./user_seeds'),
 bodyParser  = require("body-parser");
 var app = express();
@@ -44,7 +45,21 @@ app.use(function(req, res, next){
    res.locals.success = req.flash("success");
    next();
 });
-trucksObject = {};
+let trucksObject = {};
+let list = [];
+(function (){
+    console.log("Starting Scraper...")
+    scraper.dataScrape(urlTracks, (data) => {
+        data.forEach(function(truck){
+            list.push('"'+truck+'"');
+        })
+        var listString = "\{\"trucks\":\["+list+"\]}";
+        console.log("Transferring data to global...");
+        trucksObject = JSON.parse(listString);
+        console.log("Transfer ended...");
+        console.dir(trucksObject);
+    })
+}());
 
 app.get("/", function(req,res){
   res.render("home");
@@ -61,17 +76,8 @@ app.post("/login", passport.authenticate("local",
     }), function(req, res){
 });
 
-let list = [];
 app.get("/trucks", function(req, res){
-    scraper.dataScrape(urlTracks, (data) => {
-        data.forEach(function(truck){
-            list.push('"'+truck+'"');
-        })
-        var listString = "\{\"trucks\":\["+list+"\]}";
-        // console.log(listString);
-        trucksObject = JSON.parse(listString);
-        res.render("trucks",{trucks:JSON.stringify(trucksObject), user:req.user.username});
-    })
+    res.render("trucks",{trucks:JSON.stringify(trucksObject), user:req.user.username});
 });
 
 app.get("/evaluate/:truck", function(req,res){
