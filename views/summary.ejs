@@ -1,0 +1,32 @@
+<% include partials/header %>
+
+<div class="container">
+    <h2>Summary Page</h2>
+    <div  id="summaryData">
+        <div class="box">
+            <h3> Quality </h3>
+            <% qualRecs.forEach(function(rec) { %>
+               <p><span><%=rec.truck%></span></p>
+            <%})%>
+        </div>
+        <div class="box">
+            <h3> Choice </h3>
+            <% choiceRecs.forEach(function(rec) { %>
+               <p><span><%=rec.truck%></span></p>
+            <%})%>
+        </div>
+        <div class="box">
+            <h3> Price </h3>
+            <% priceRecs.forEach(function(rec) { %>
+               <p><span><%=rec.truck%></span></p>
+            <%})%>
+        </div>
+        <div class="box">
+            <h3> Authenticity </h3>
+            <% authenticityRecs.forEach(function(rec) { %>
+               <p><span><%=rec.truck%></span></p>
+            <%})%>
+        </div>
+    </div>
+</div>
+<% include partials/footer %>

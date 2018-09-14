@@ -1,12 +1,11 @@
 var mongoose = require('mongoose');
 
-var TotalSchema = new mongoose.Schema({
+var SummarySchema = new mongoose.Schema({
     truck: String,
     quality: Number,
     price: Number,
     authenticity: Number,
-    choices: Number,
-    updates: Number
+    choices: Number
 },{usePushEach:true});
 
-module.exports = mongoose.model("Total", TotalSchema);
+module.exports = mongoose.model("Summary", SummarySchema);

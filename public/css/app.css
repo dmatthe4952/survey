@@ -1,15 +1,21 @@
 body {
-  color: purple;
+  color: dark-gray;
 }
 .form-group {
-    margin-top:30px;
-    margin-left: 15px;
+    margin-top:5vh;
+    margin-left: 5vw;
 }
 .row{
-    display: inline-flex;
 }
 .container{
-    margin-left: 40px;
+    margin-left: 5vw;
+}
+.box{
+    margin-left: 1vw;
+    background-color: #fdfdfd;
+}
+#summaryData{
+    display: inline-flex;
 }
 
 @media screen(max-width=690){
