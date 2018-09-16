@@ -10,19 +10,27 @@ data = [
         password: 'password123'
     },
     {
-        username: 'carol',
+        username: 'carol_gray',
         password: 'password123'
     },
     {
-        username: 'candy',
+        username: 'candy_tharp',
         password: 'password123'
     },
     {
-        username: 'dave',
+        username: 'dave_matthews',
         password: 'password123'
     },
     {
-        username: 'other',
+        username: 'other1',
+        password: 'password123'
+    }
+    {
+        username: 'other2',
+        password: 'password123'
+    }
+    {
+        username: 'other3',
         password: 'password123'
     }
 ]
