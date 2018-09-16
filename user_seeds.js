@@ -24,17 +24,13 @@ data = [
     {
         username: 'other1',
         password: 'password123'
-    }
+    },
     {
         username: 'other2',
         password: 'password123'
-    }
+    },
     {
         username: 'other3',
-        password: 'password123'
-    }
-    {
-        username: 'other4',
         password: 'password123'
     }
 ]
