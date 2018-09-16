@@ -33,6 +33,10 @@ data = [
         username: 'other3',
         password: 'password123'
     }
+    {
+        username: 'other4',
+        password: 'password123'
+    }
 ]
 function userSeedDB() {
     User.deleteMany({}, function(err){
